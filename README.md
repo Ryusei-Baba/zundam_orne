@@ -12,3 +12,8 @@ cd ~/ws/
 catkin build
 source devel/setup.bash
 ```
+
+## run
+```
+rosrun zundam_orne zundam_orne_node.py
+```
