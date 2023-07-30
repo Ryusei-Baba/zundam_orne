@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: BSD 3-Clause
 
 import rospy
-import time
 import roslib
 roslib.load_manifest('zundam_orne')
 from std_msgs.msg import String
@@ -19,12 +18,12 @@ class ZundamNode():
         self.flg = 0
         self.time = 0
                
-    def timer(self):
+    def TimerCallback(self, event):
         self.time += 0.1
 
     def callback(self, Twist): 
         if self.time <= 5:
-            if self.flg != 1 and Twist.linear.x == 0.0:
+            if self.flg != 1 and Twist.linear.x == 0.0 and Twist.angular.z == 0.0:
                 playsound(roslib.packages.get_pkg_dir('zundam_orne') + '/voice/004_ずんだもん（ノーマル）_お休み中なのだ.wav')               
                 self.flg = 1
                 self.time = 0
@@ -67,12 +66,14 @@ class ZundamNode():
 
 def main():
     rospy.init_node('zundam_node')
-    rate = rospy.Rate(10)
     node = ZundamNode()
-    while not rospy.is_shutdown():
-        # rospy.spin()
-        node.timer()
-        rate.sleep()
+    try:
+        while not rospy.is_shutdown():
+            rospy.Timer(rospy.Duration(0.1), node.TimerCallback)
+            rospy.spin()
+    except rospy.ROSInterruptException:
+        pass
+    
 
 if __name__ == '__main__':
     main()
