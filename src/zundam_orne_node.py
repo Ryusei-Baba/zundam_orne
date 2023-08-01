@@ -22,9 +22,9 @@ class ZundamNode():
         self.time += 0.1
 
     def callback(self, Twist): 
-        if self.time <= 5:
+        if self.time <= 10:
             if self.flg != 1 and Twist.linear.x == 0.0 and Twist.angular.z == 0.0:
-                playsound(roslib.packages.get_pkg_dir('zundam_orne') + '/voice/004_ずんだもん（ノーマル）_お休み中なのだ.wav')               
+                # playsound(roslib.packages.get_pkg_dir('zundam_orne') + '/voice/004_ずんだもん（ノーマル）_お休み中なのだ.wav')               
                 self.flg = 1
                 self.time = 0
                 return Twist
