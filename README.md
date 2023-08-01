@@ -1,5 +1,5 @@
 # zundam_orne
-ROS です．Topicを受け取るとずんだもんが喋ります．</br>
+ROS です．Topic（cmd_vel）を受け取るとずんだもんが喋ります．</br>
 クレジット　VOICEVOX:ずんだもん [VOICEVOX 公式ページ](https://voicevox.hiroshiba.jp/)</br>
 
 
